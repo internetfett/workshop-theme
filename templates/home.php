@@ -46,7 +46,7 @@ get_header(); ?>
 			<div class="row mt-5">
 				<?php 
 					// the query
-					$args = array('post_type' => 'project', 'posts_per_page' => 6);
+					$args = array('post_type' => 'project', 'posts_per_page' => 9);
 
 					$the_query = new WP_Query( $args ); ?>
 
