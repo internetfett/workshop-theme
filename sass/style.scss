@@ -1,13 +1,12 @@
 /*
-Theme Name: StanleyWP
-Theme URI: http://bootstrapwp.com
-Author: Brad Williams
-Author URI: http://braginteractive.com
+Theme Name: InternetFett's Workshop
+Theme URI: https://github.com/internetfett/workshop-theme
+Author: Cody Kinsey
+Author URI: http://internetfett.com
 Description: Bootstrap 4 WordPress Theme
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: strappress
 Tags:
 
 This theme, like WordPress, is licensed under the GPL.
@@ -28,7 +27,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 /*--------------------------------------------------------------
 # Bootstrap
 --------------------------------------------------------------*/
-@import "bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 
 /*--------------------------------------------------------------
 # Theme Styles and Layout

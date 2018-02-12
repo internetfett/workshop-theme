@@ -1,4 +1,8 @@
-StanleyWP - Bootstrap 4 WordPress Theme
+InternetFett's Workshop
+Bootstrap 4 WordPress Theme
 ===
 
-This theme was built in the tutorial series on how to create a Bootstrap 4 WordPress theme. 
+Built upon the groundwork laid by the StanleyWP starter theme from gentsthemes.com
+
+node-sass sass/style.scss style.css
+node-sass sass/style.scss style.min.css --output-style compressed
