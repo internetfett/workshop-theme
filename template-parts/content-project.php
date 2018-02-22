@@ -13,7 +13,7 @@
 
 	<div class="container">
 		<div class="row justify-content-center text-center">
-			<div class="col-md-8">
+			<div class="col-md-10">
 
 				<header class="entry-header">
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
@@ -23,8 +23,36 @@
 		</div>
 
 		<div class="row justify-content-center text-center">
-			<div class="col-md-8">
-
+			<div class="col-md-10">
+				<?php
+					$hosted_name = get_post_meta( get_the_ID(), '_stanleywp_host_name', true );
+					$hosted_link = get_post_meta( get_the_ID(), '_stanleywp_host_url', true );
+                    $sources = get_post_meta( get_the_ID(), '_stanleywp_source_group', true );
+                    if($hosted_name || $sources) echo '<div class="card float-right ml-4" style="width:30%"><div class="card-body">';
+					if($hosted_name) {
+						echo '<h2>Project:</h2>';
+						if($hosted_link) echo '<p><a href="'.$hosted_link.'">'.$hosted_name.'</a></p>';
+						else echo '<p>'.$hosted_name.'</p>';
+					}
+					if($sources)
+						echo '<h2>Sources:</h2>';
+					foreach((array)$sources as $key => $source) {
+						if(isset( $source['_stanleywp_source_name'])) {
+							echo '<div>';
+							if(isset( $source['_stanleywp_source_url'])) {
+								echo '<a href="'.$source['_stanleywp_source_url'].'">'.$source['_stanleywp_source_name'].'</a>';
+							} else {
+								echo $source['_stanleywp_source_name'];
+							}
+							if(isset( $source['_stanleywp_source_author'])) {
+								echo '<br/>by '.$source['_stanleywp_source_author'];
+							}
+							echo '</div>';
+						}
+					}
+                    if($hosted_name || $sources) echo '</div></div>';
+				?>
+            
 				<div class="entry-content">
 					<?php
 						the_content( sprintf(
@@ -46,48 +74,19 @@
 
 					// Loop through them and output an image
 					foreach ( (array) $files as $attachment_id => $attachment_url ) {
-						echo '<div class="mb-4">';
-						echo wp_get_attachment_image( $attachment_id, 'full' );
-						echo '</div>';
+                        echo '<figure class="figure mb-4">';
+						echo wp_get_attachment_image($attachment_id, 'full' , ["class" => "figure-img img-fluid rounded"]);
+                        echo '<figcaption class="figure-caption text-right">'.wp_get_attachment_caption($attachment_id).'</figcaption>';
+						echo '</figure>';
 					}
 				 ?>
 
-				  <?php echo get_the_term_list( get_the_ID(), 'project_category', 'Type: ', ', ', ''); ?> 
-
 			</div><!--  .col-md-8 -->
-
-			<div class="col-md-4">
-				<?php
-					$hosted_name = get_post_meta( get_the_ID(), '_stanleywp_host_name', true );
-					$hosted_link = get_post_meta( get_the_ID(), '_stanleywp_host_url', true );
-					if($hosted_name) {
-						echo '<h2>Project:</h2>';
-						if($hosted_link) echo '<p><a href="'.$hosted_link.'">'.$hosted_name.'</a></p>';
-						else echo '<p>'.$hosted_name.'</p>';
-					}
-					$sources = get_post_meta( get_the_ID(), '_stanleywp_source_group', true );
-					if($sources)
-						echo '<h2>Sources:</h2>';
-					foreach((array)$sources as $key => $source) {
-						if(isset( $source['_stanleywp_source_name'])) {
-							echo '<div>';
-							if(isset( $source['_stanleywp_source_url'])) {
-								echo '<a href="'.$source['_stanleywp_source_url'].'">'.$source['_stanleywp_source_name'].'</a>';
-							} else {
-								echo $source['_stanleywp_source_name'];
-							}
-							if(isset( $source['_stanleywp_source_author'])) {
-								echo '<br/>by '.$source['_stanleywp_source_author'];
-							}
-							echo '</div>';
-						}
-					}
-				?>
-			</div><!--  .col-md-4 -->
 		</div><!--  .row -->
 
 
 		<footer class="entry-footer">
+            <?php echo get_the_term_list( get_the_ID(), 'project_category', 'Type: ', ', ', ''); ?> 
 			<?php stanleywp_entry_footer(); ?>
 		</footer><!-- .entry-footer -->
 
