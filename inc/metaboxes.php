@@ -63,7 +63,63 @@ function cmb2_stanleywp_metaboxes() {
 		'type'       => 'file_list',
 	) );
 
-	
+	/**
+	 * Project sidebar metabox
+	 */
+	$cmb_project_sidebar = new_cmb2_box( array(
+		'id'			=> 'project_sidebar_metabox',
+		'title'			=> 'Project Meta',
+		'object_types'	=> array( 'project', ),
+		'context'		=> 'normal',
+		'priority'		=> 'low',
+		'show_names'	=> true,
 
-	// Add other metaboxes as needed
+	) );
+
+	$cmb_project_sidebar->add_field( array(
+		'name' => 'Hosted Name',
+		'desc' => 'name of external host',
+		'id'   => $prefix . 'host_name',
+		'type' => 'text',
+	) );
+
+	$cmb_project_sidebar->add_field( array(
+		'name' => 'Hosted Link',
+		'desc' => 'external link to project',
+		'id'   => $prefix . 'host_url',
+		'type' => 'text_url',
+	) );
+
+	$source_group_id = $cmb_project_sidebar->add_field( array(
+		'id'          => $prefix . 'source_group',
+		'type'        => 'group',
+		'description' => 'Group of project source files',
+		'options'     => array(
+			'group_title'   => 'Source {#}',
+			'add_button'    => 'Add Source',
+			'remove_button' => 'Remove Source',
+			'sortable'      => true,
+		),
+	) );
+
+	$cmb_project_sidebar->add_group_field( $source_group_id, array(
+		'name' => 'Source Name',
+		'desc' => 'name of model source',
+		'id'   => $prefix . 'source_name',
+		'type' => 'text',
+	) );
+
+	$cmb_project_sidebar->add_group_field( $source_group_id, array(
+		'name' => 'Source URL',
+		'desc' => 'url to model source',
+		'id'   => $prefix . 'source_url',
+		'type' => 'text_url',
+	) );
+
+	$cmb_project_sidebar->add_group_field( $source_group_id, array(
+		'name' => 'Source Author',
+		'desc' => 'name of model author',
+		'id'   => $prefix . 'source_author',
+		'type' => 'text',
+	) );
 }
