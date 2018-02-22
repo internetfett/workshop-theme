@@ -28,7 +28,7 @@
 					$hosted_name = get_post_meta( get_the_ID(), '_stanleywp_host_name', true );
 					$hosted_link = get_post_meta( get_the_ID(), '_stanleywp_host_url', true );
                     $sources = get_post_meta( get_the_ID(), '_stanleywp_source_group', true );
-                    if($hosted_name || $sources) echo '<div class="card float-right ml-4" style="width:30%"><div class="card-body">';
+                    if($hosted_name || $sources) echo '<div class="card float-right ml-4 mb-4" style="width:30%"><div class="card-body">';
 					if($hosted_name) {
 						echo '<h2>Project:</h2>';
 						if($hosted_link) echo '<p><a href="'.$hosted_link.'">'.$hosted_name.'</a></p>';
@@ -53,7 +53,7 @@
                     if($hosted_name || $sources) echo '</div></div>';
 				?>
             
-				<div class="entry-content">
+				<div class="entry-content text-left">
 					<?php
 						the_content( sprintf(
 							/* translators: %s: Name of current post. */
@@ -72,10 +72,13 @@
 					// Get the list of files
 					$files = get_post_meta( get_the_ID(), '_stanleywp_images', 1 );
 
+					if($files) echo '<h1 class="mt-4">Project Images</h1>';
+
 					// Loop through them and output an image
 					foreach ( (array) $files as $attachment_id => $attachment_url ) {
-                        echo '<figure class="figure mb-4">';
-						echo wp_get_attachment_image($attachment_id, 'full' , ["class" => "figure-img img-fluid rounded"]);
+						echo '<figure class="figure mb-4">';
+						echo '<a href="'.wp_get_attachment_url($attachment_id).'">';
+						echo wp_get_attachment_image($attachment_id, 'full' , ["class" => "figure-img img-fluid"]).'</a>';
                         echo '<figcaption class="figure-caption text-right">'.wp_get_attachment_caption($attachment_id).'</figcaption>';
 						echo '</figure>';
 					}
