@@ -14,6 +14,14 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="InternetFett's Workshop">
+<?php if(is_single()) { ?>
+<meta property="og:title" content="<?php echo single_post_title('', false); ?>">
+<meta property="og:image" content="<?php the_post_thumbnail_url('large'); ?>">
+<meta property="og:image:height" content="300">
+<meta property="og:image:width" content="533">
+<?php } ?>
 <link rel="profile" href="http://gmpg.org/xfn/11">
 
 <?php wp_head(); ?>
@@ -21,7 +29,7 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-
+<?php the_post_thumbnail('thumbnail'); ?>
 	<header id="masthead" class="site-header" role="banner">
 	    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	    	<div class="container">
